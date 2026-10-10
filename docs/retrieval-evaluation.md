@@ -33,3 +33,5 @@ python -m app.cli evaluate
 ```
 
 The command prints the full top-five rankings, cosine or keyword score, relevant tags, per-query metrics and aggregate metrics as JSON. It is read-only. Re-run it after changing catalogue text, tags, model revision or retrieval logic rather than copying the numbers above.
+
+The same evaluation was reproduced against Tiger Cloud on October 10, 2026. Its aggregate values matched the local result; the reviewed output is stored in `docs/tiger-retrieval-evaluation.json`.

@@ -1,5 +1,5 @@
 name: Test TrailScout
-on: [push, pull_request]
+"on": [push, pull_request]
 permissions:
   contents: read
 jobs:
@@ -12,7 +12,7 @@ jobs:
           POSTGRES_USER: trailscout
           POSTGRES_PASSWORD: test-only
           POSTGRES_DB: trailscout_test
-        ports: ['5432:5432']
+        ports: ["5432:5432"]
         options: >-
           --health-cmd "pg_isready -U trailscout -d trailscout_test"
           --health-interval 5s --health-timeout 5s --health-retries 10
@@ -20,15 +20,15 @@ jobs:
       DATABASE_URL: postgresql://trailscout:test-only@localhost:5432/trailscout_test
       PYTHONPATH: backend
       HF_HOME: .cache/huggingface
-      HF_HUB_DISABLE_TELEMETRY: '1'
+      HF_HUB_DISABLE_TELEMETRY: "1"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.13'
+          python-version: "3.13"
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: "22"
           cache: npm
           cache-dependency-path: frontend/package-lock.json
       - run: pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu

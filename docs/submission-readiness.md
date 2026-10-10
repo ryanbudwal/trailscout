@@ -10,6 +10,10 @@ Status reviewed on **October 10, 2026**. The official deadline is **October 11, 
 - GitHub Actions run 1, “Test TrailScout,” completed successfully for that commit on October 10, 2026.
 - Real `all-MiniLM-L6-v2` inference at the pinned revision, 384 dimensions and normalized vectors.
 - PostgreSQL 17.6 with pgvector 0.8.1 locally; 24 stored embeddings.
+- Tiger Cloud PostgreSQL 18 with pgvector 0.8.7; 24 stored MiniLM embeddings.
+- Verified encrypted Tiger Cloud session using TLS 1.3 and a 256-bit cipher.
+- Credential-free Tiger Cloud capability and semantic-ranking evidence in `docs/tiger-evidence.json`.
+- Four-query retrieval evaluation reproduced against Tiger Cloud in `docs/tiger-retrieval-evaluation.json`.
 - Exact cosine ranking runs inside PostgreSQL with parameterized duration, difficulty, radius and timestamp filters.
 - Three distinct natural-language rankings captured in `docs/local-evidence.json`.
 - Reproducible four-query semantic-versus-keyword evaluation with measured limitations.
@@ -23,13 +27,9 @@ Status reviewed on **October 10, 2026**. The official deadline is **October 11, 
 
 ### Required for Best Use of Tiger Data
 
-- Create or select a dedicated Tiger Cloud service and review its plan/limits.
-- Put its credential in the untracked `.env` file or secret manager.
-- Follow `docs/tiger-cloud-evidence.md` to migrate, seed and verify TLS.
-- Run `python -m app.cli evidence` against Tiger Cloud and review the redacted output.
 - Run `db/tiger-evidence.sql` in the Tiger Cloud SQL editor.
 - Capture the two credential-free evidence screenshots.
-- Only then keep “Best Use of Tiger Data” in the DEV article.
+- Add the reviewed screenshots alongside `docs/tiger-evidence.json` in the submission materials.
 
 ### Required for the DEV submission
 
@@ -46,13 +46,13 @@ Status reviewed on **October 10, 2026**. The official deadline is **October 11, 
 | Category | Current status | What changes the status |
 |---|---|---|
 | Overall Touch Grass challenge | Technically ready; publication pending | Publish the compliant DEV article during the contest window. |
-| Best Use of Tiger Data | **Not yet verified** | Complete real Tiger Cloud migration, application queries and cloud evidence. |
+| Best Use of Tiger Data | **Technically verified; screenshots pending** | Capture clean Tiger Cloud SQL-console evidence and include it with the verified JSON report. |
 | Best Use of Render | **Not eligible** | Would require a real, reliable Render deployment. This was intentionally deprioritized. |
 | Other partner categories | **Not claimed** | No qualifying technology was added merely for category coverage. |
 
 ## Unresolved blockers
 
-1. No Tiger Cloud credential or verified service is available in the local environment.
+1. Tiger Cloud SQL-console screenshots have not been captured yet.
 2. No live deployment URL or uploaded demo video exists.
 3. No actual outdoor testing/photo has been provided.
 4. DEV publication and contest submission require the user's review and explicit action.

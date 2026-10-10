@@ -1,0 +1,112 @@
+{
+  "connection": {
+    "database": "tsdb",
+    "server_version": "18.6 (Ubuntu 18.6-1.pgdg22.04+2)",
+    "tls": {
+      "ssl": true,
+      "version": "TLSv1.3",
+      "cipher": "TLS_AES_256_GCM_SHA384"
+    }
+  },
+  "extensions": [
+    {
+      "extname": "timescaledb",
+      "extversion": "2.30.2"
+    },
+    {
+      "extname": "vector",
+      "extversion": "0.8.7"
+    }
+  ],
+  "catalogue": {
+    "places": 24,
+    "min_dimensions": 384,
+    "max_dimensions": 384,
+    "embedding_models": 1
+  },
+  "model": "sentence-transformers/all-MiniLM-L6-v2@1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+  "searches": [
+    {
+      "query": "a peaceful shaded walk among trees",
+      "results": [
+        {
+          "name": "Sherwood Park canopy walk",
+          "similarity": 0.627
+        },
+        {
+          "name": "Beltline tree-lined walk",
+          "similarity": 0.524
+        },
+        {
+          "name": "Sunnybrook green loop",
+          "similarity": 0.5161
+        },
+        {
+          "name": "High Park woodland wander",
+          "similarity": 0.508
+        },
+        {
+          "name": "Guild Park garden walk",
+          "similarity": 0.4605
+        }
+      ]
+    },
+    {
+      "query": "somewhere by the water to watch the sunset",
+      "results": [
+        {
+          "name": "Humber Bay shoreline",
+          "similarity": 0.4219
+        },
+        {
+          "name": "Trillium Park pause",
+          "similarity": 0.4006
+        },
+        {
+          "name": "Colonel Samuel Smith Park",
+          "similarity": 0.3928
+        },
+        {
+          "name": "Tommy Thompson Park",
+          "similarity": 0.3711
+        },
+        {
+          "name": "Bluffer\u2019s Park lakeside",
+          "similarity": 0.3684
+        }
+      ]
+    },
+    {
+      "query": "a place to spot birds and explore wetlands",
+      "results": [
+        {
+          "name": "Colonel Samuel Smith Park",
+          "similarity": 0.6923
+        },
+        {
+          "name": "East Point birding walk",
+          "similarity": 0.5919
+        },
+        {
+          "name": "Tommy Thompson Park",
+          "similarity": 0.5589
+        },
+        {
+          "name": "Brick Works valley stroll",
+          "similarity": 0.5115
+        },
+        {
+          "name": "High Park woodland wander",
+          "similarity": 0.4903
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "tls_enabled": true,
+    "vector_extension_present": true,
+    "all_vectors_are_384_dimensions": true,
+    "single_embedding_model": true
+  },
+  "claim_boundary": "This output identifies database capabilities and results. Call it Tiger Cloud evidence only when the command was run against your verified Tiger Cloud service."
+}

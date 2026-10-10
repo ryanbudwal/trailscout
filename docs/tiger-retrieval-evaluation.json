@@ -1,0 +1,513 @@
+{
+  "method": {
+    "semantic": "Normalized MiniLM embeddings ranked by exact pgvector cosine similarity.",
+    "keyword": "Distinct non-stopword query-token overlap with name, description and tags; ties use catalogue ID.",
+    "relevance": "A transparent, task-specific tag rule authored before inspecting rankings.",
+    "limitations": "Four queries over 24 authored places are demonstration evidence, not a general benchmark."
+  },
+  "queries": [
+    {
+      "query": "I need somewhere peaceful to clear my head",
+      "relevance_rule": "At least one authored relevant tag matches.",
+      "relevant_tags": [
+        "Forest",
+        "Quiet moments",
+        "Shade",
+        "Woodland"
+      ],
+      "semantic": {
+        "top_5": [
+          {
+            "name": "Sunnybrook green loop",
+            "score": 0.3101,
+            "relevant": false,
+            "tags": [
+              "Open spaces",
+              "Trees",
+              "Picnic"
+            ]
+          },
+          {
+            "name": "Bluffer\u2019s Park lakeside",
+            "score": 0.2897,
+            "relevant": false,
+            "tags": [
+              "Beach",
+              "Bluffs",
+              "Photography"
+            ]
+          },
+          {
+            "name": "Tommy Thompson Park",
+            "score": 0.2864,
+            "relevant": false,
+            "tags": [
+              "Birdwatching",
+              "Lake views",
+              "Open skies"
+            ]
+          },
+          {
+            "name": "Sherwood Park canopy walk",
+            "score": 0.282,
+            "relevant": true,
+            "tags": [
+              "Old trees",
+              "Shade",
+              "Ravine"
+            ]
+          },
+          {
+            "name": "High Park woodland wander",
+            "score": 0.2792,
+            "relevant": true,
+            "tags": [
+              "Woodland",
+              "Quiet moments",
+              "Birdwatching"
+            ]
+          }
+        ],
+        "relevant_at_3": 0,
+        "relevant_at_5": 2,
+        "reciprocal_rank": 0.25
+      },
+      "keyword": {
+        "top_5": [
+          {
+            "name": "High Park woodland wander",
+            "score": 0.25,
+            "relevant": true,
+            "tags": [
+              "Woodland",
+              "Quiet moments",
+              "Birdwatching"
+            ]
+          },
+          {
+            "name": "Glen Stewart Ravine",
+            "score": 0.0,
+            "relevant": true,
+            "tags": [
+              "Ravine",
+              "Boardwalk",
+              "Shade"
+            ]
+          },
+          {
+            "name": "Tommy Thompson Park",
+            "score": 0.0,
+            "relevant": false,
+            "tags": [
+              "Birdwatching",
+              "Lake views",
+              "Open skies"
+            ]
+          },
+          {
+            "name": "Rouge woodland escape",
+            "score": 0.0,
+            "relevant": true,
+            "tags": [
+              "Forest",
+              "River valley",
+              "Wildlife"
+            ]
+          },
+          {
+            "name": "Brick Works valley stroll",
+            "score": 0.0,
+            "relevant": false,
+            "tags": [
+              "Ponds",
+              "Nature break",
+              "Birdwatching"
+            ]
+          }
+        ],
+        "relevant_at_3": 2,
+        "relevant_at_5": 3,
+        "reciprocal_rank": 1.0
+      }
+    },
+    {
+      "query": "A quiet walk underneath tall trees",
+      "relevance_rule": "At least one authored relevant tag matches.",
+      "relevant_tags": [
+        "Forest",
+        "Shade",
+        "Trees",
+        "Woodland"
+      ],
+      "semantic": {
+        "top_5": [
+          {
+            "name": "Sherwood Park canopy walk",
+            "score": 0.5794,
+            "relevant": true,
+            "tags": [
+              "Old trees",
+              "Shade",
+              "Ravine"
+            ]
+          },
+          {
+            "name": "High Park woodland wander",
+            "score": 0.4865,
+            "relevant": true,
+            "tags": [
+              "Woodland",
+              "Quiet moments",
+              "Birdwatching"
+            ]
+          },
+          {
+            "name": "Beltline tree-lined walk",
+            "score": 0.4278,
+            "relevant": true,
+            "tags": [
+              "Trees",
+              "Urban escape",
+              "Shared path"
+            ]
+          },
+          {
+            "name": "Guild Park garden walk",
+            "score": 0.3894,
+            "relevant": true,
+            "tags": [
+              "Gardens",
+              "Sculpture",
+              "Trees"
+            ]
+          },
+          {
+            "name": "Morningside valley walk",
+            "score": 0.3562,
+            "relevant": true,
+            "tags": [
+              "River",
+              "Woodland",
+              "Picnic"
+            ]
+          }
+        ],
+        "relevant_at_3": 3,
+        "relevant_at_5": 5,
+        "reciprocal_rank": 1.0
+      },
+      "keyword": {
+        "top_5": [
+          {
+            "name": "High Park woodland wander",
+            "score": 0.6,
+            "relevant": true,
+            "tags": [
+              "Woodland",
+              "Quiet moments",
+              "Birdwatching"
+            ]
+          },
+          {
+            "name": "Sherwood Park canopy walk",
+            "score": 0.6,
+            "relevant": true,
+            "tags": [
+              "Old trees",
+              "Shade",
+              "Ravine"
+            ]
+          },
+          {
+            "name": "Taylor Creek ramble",
+            "score": 0.6,
+            "relevant": true,
+            "tags": [
+              "Creek",
+              "Trees",
+              "Valley"
+            ]
+          },
+          {
+            "name": "Glen Stewart Ravine",
+            "score": 0.4,
+            "relevant": true,
+            "tags": [
+              "Ravine",
+              "Boardwalk",
+              "Shade"
+            ]
+          },
+          {
+            "name": "Guild Park garden walk",
+            "score": 0.4,
+            "relevant": true,
+            "tags": [
+              "Gardens",
+              "Sculpture",
+              "Trees"
+            ]
+          }
+        ],
+        "relevant_at_3": 3,
+        "relevant_at_5": 5,
+        "reciprocal_rank": 1.0
+      }
+    },
+    {
+      "query": "Somewhere by the water to watch the sunset",
+      "relevance_rule": "At least one authored relevant tag matches.",
+      "relevant_tags": [
+        "Beach",
+        "Lake views",
+        "Sunset",
+        "Waterfront"
+      ],
+      "semantic": {
+        "top_5": [
+          {
+            "name": "Humber Bay shoreline",
+            "score": 0.4219,
+            "relevant": true,
+            "tags": [
+              "Lake views",
+              "Sunset",
+              "Photography"
+            ]
+          },
+          {
+            "name": "Trillium Park pause",
+            "score": 0.4006,
+            "relevant": true,
+            "tags": [
+              "Skyline",
+              "Sunset",
+              "Short break"
+            ]
+          },
+          {
+            "name": "Colonel Samuel Smith Park",
+            "score": 0.3928,
+            "relevant": true,
+            "tags": [
+              "Birdwatching",
+              "Wetlands",
+              "Lake views"
+            ]
+          },
+          {
+            "name": "Tommy Thompson Park",
+            "score": 0.3711,
+            "relevant": true,
+            "tags": [
+              "Birdwatching",
+              "Lake views",
+              "Open skies"
+            ]
+          },
+          {
+            "name": "Bluffer\u2019s Park lakeside",
+            "score": 0.3684,
+            "relevant": true,
+            "tags": [
+              "Beach",
+              "Bluffs",
+              "Photography"
+            ]
+          }
+        ],
+        "relevant_at_3": 3,
+        "relevant_at_5": 5,
+        "reciprocal_rank": 1.0
+      },
+      "keyword": {
+        "top_5": [
+          {
+            "name": "Humber Bay shoreline",
+            "score": 0.6667,
+            "relevant": true,
+            "tags": [
+              "Lake views",
+              "Sunset",
+              "Photography"
+            ]
+          },
+          {
+            "name": "Colonel Samuel Smith Park",
+            "score": 0.6667,
+            "relevant": true,
+            "tags": [
+              "Birdwatching",
+              "Wetlands",
+              "Lake views"
+            ]
+          },
+          {
+            "name": "Wilket Creek woodland",
+            "score": 0.3333,
+            "relevant": false,
+            "tags": [
+              "Creek",
+              "Woodland",
+              "Shade"
+            ]
+          },
+          {
+            "name": "Island shoreline wander",
+            "score": 0.3333,
+            "relevant": true,
+            "tags": [
+              "Lake views",
+              "Beach",
+              "Day escape"
+            ]
+          },
+          {
+            "name": "Trillium Park pause",
+            "score": 0.3333,
+            "relevant": true,
+            "tags": [
+              "Skyline",
+              "Sunset",
+              "Short break"
+            ]
+          }
+        ],
+        "relevant_at_3": 2,
+        "relevant_at_5": 4,
+        "reciprocal_rank": 1.0
+      }
+    },
+    {
+      "query": "A place to spot birds and explore wetlands",
+      "relevance_rule": "At least one authored relevant tag matches.",
+      "relevant_tags": [
+        "Birdwatching",
+        "Ponds",
+        "Wetlands"
+      ],
+      "semantic": {
+        "top_5": [
+          {
+            "name": "Colonel Samuel Smith Park",
+            "score": 0.6923,
+            "relevant": true,
+            "tags": [
+              "Birdwatching",
+              "Wetlands",
+              "Lake views"
+            ]
+          },
+          {
+            "name": "East Point birding walk",
+            "score": 0.5919,
+            "relevant": true,
+            "tags": [
+              "Birdwatching",
+              "Meadow",
+              "Lake views"
+            ]
+          },
+          {
+            "name": "Tommy Thompson Park",
+            "score": 0.5589,
+            "relevant": true,
+            "tags": [
+              "Birdwatching",
+              "Lake views",
+              "Open skies"
+            ]
+          },
+          {
+            "name": "Brick Works valley stroll",
+            "score": 0.5115,
+            "relevant": true,
+            "tags": [
+              "Ponds",
+              "Nature break",
+              "Birdwatching"
+            ]
+          },
+          {
+            "name": "High Park woodland wander",
+            "score": 0.4903,
+            "relevant": true,
+            "tags": [
+              "Woodland",
+              "Quiet moments",
+              "Birdwatching"
+            ]
+          }
+        ],
+        "relevant_at_3": 3,
+        "relevant_at_5": 5,
+        "reciprocal_rank": 1.0
+      },
+      "keyword": {
+        "top_5": [
+          {
+            "name": "Colonel Samuel Smith Park",
+            "score": 0.4,
+            "relevant": true,
+            "tags": [
+              "Birdwatching",
+              "Wetlands",
+              "Lake views"
+            ]
+          },
+          {
+            "name": "Brick Works valley stroll",
+            "score": 0.2,
+            "relevant": true,
+            "tags": [
+              "Ponds",
+              "Nature break",
+              "Birdwatching"
+            ]
+          },
+          {
+            "name": "Taylor Creek ramble",
+            "score": 0.2,
+            "relevant": false,
+            "tags": [
+              "Creek",
+              "Trees",
+              "Valley"
+            ]
+          },
+          {
+            "name": "Humber Bay shoreline",
+            "score": 0.2,
+            "relevant": false,
+            "tags": [
+              "Lake views",
+              "Sunset",
+              "Photography"
+            ]
+          },
+          {
+            "name": "Guild Park garden walk",
+            "score": 0.2,
+            "relevant": false,
+            "tags": [
+              "Gardens",
+              "Sculpture",
+              "Trees"
+            ]
+          }
+        ],
+        "relevant_at_3": 2,
+        "relevant_at_5": 2,
+        "reciprocal_rank": 1.0
+      }
+    }
+  ],
+  "summary": {
+    "semantic_mean_relevant_at_3": 2.25,
+    "keyword_mean_relevant_at_3": 2.25,
+    "semantic_mean_relevant_at_5": 4.25,
+    "keyword_mean_relevant_at_5": 3.5,
+    "semantic_mean_reciprocal_rank": 0.812,
+    "keyword_mean_reciprocal_rank": 1.0
+  }
+}

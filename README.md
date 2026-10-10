@@ -156,13 +156,15 @@ Time filtering is available through `recorded_after`, for example `"2026-10-09T0
 - [DEV Touch Grass article draft](docs/dev-touch-grass-submission.md)
 - [DEV 60–90-second demo script](docs/dev-demo-script.md)
 - [Tiger Cloud migration and evidence runbook](docs/tiger-cloud-evidence.md)
+- [Verified Tiger Cloud evidence](docs/tiger-evidence.json)
+- [Tiger Cloud retrieval evaluation](docs/tiger-retrieval-evaluation.json)
 - [Measured semantic-versus-keyword evaluation](docs/retrieval-evaluation.md)
 - [Prize and submission readiness](docs/submission-readiness.md)
 - [Measured local database evidence](docs/local-evidence.json)
 - [Actual verification results and remaining work](docs/verification.md)
 - [Data and asset provenance](docs/data-and-credits.md)
 
-The next hackathon step is to run the same migration and seed against your own **Tiger Cloud** service, verify TLS and search there, and capture its database evidence. A local PostgreSQL demonstration is not proof of Tiger Cloud usage.
+Tiger Cloud migration, seed, TLS and semantic retrieval are verified. The remaining Tiger Data submission step is to run `db/tiger-evidence.sql` in the Tiger Cloud SQL editor and capture credential-free screenshots that visibly establish the cloud service context.
 
 ## AI tools and licensing
 

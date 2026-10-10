@@ -1,6 +1,6 @@
 # Tiger Cloud migration and evidence runbook
 
-TrailScout is architecturally ready for Tiger Cloud because it uses ordinary PostgreSQL connections, the `vector` extension, a fixed `VECTOR(384)` column and parameterized pgvector cosine queries. Local PostgreSQL evidence is complete. **Tiger Cloud has not yet been connected or verified.**
+TrailScout uses ordinary PostgreSQL connections, the `vector` extension, a fixed `VECTOR(384)` column and parameterized pgvector cosine queries. On **October 10, 2026**, the application was migrated to a dedicated Tiger Cloud service, seeded and verified with real MiniLM queries. The reviewed, credential-free output is stored in `docs/tiger-evidence.json`.
 
 Tiger Data documents pgvector as available on AI-focused Tiger Cloud services, and describes Tiger Cloud services as PostgreSQL-compatible. Use the connection details issued by your own service. Do not copy credentials into source files, screenshots, terminal recordings or the DEV article.
 
@@ -34,10 +34,10 @@ Seeded 24 real MiniLM vectors (384 dimensions).
 
 ## 3. Capture application-generated evidence
 
-Run:
+The verified run used:
 
 ```bash
-python -m app.cli evidence > tiger-evidence.json
+python -m app.cli evidence > docs/tiger-evidence.json
 ```
 
 Open the file and confirm all of the following before calling it Tiger Cloud evidence:
@@ -49,7 +49,7 @@ Open the file and confirm all of the following before calling it Tiger Cloud evi
 - Exactly one embedding model is present and its pinned revision is shown.
 - The three natural-language searches have distinct, plausible rankings.
 
-The command deliberately omits host, port, username and password. It is read-only, but model inference still runs locally on the application machine.
+The command deliberately omits host, port, username and password. It is read-only, but model inference still runs locally on the application machine. The October 10 result confirms TLS 1.3, pgvector 0.8.7, 24 rows, 384 dimensions, one pinned embedding model and three successful natural-language rankings.
 
 ## 4. Capture SQL-console evidence
 
@@ -86,4 +86,4 @@ The runtime role does not need extension creation, schema migration, catalogue m
 
 ## Evidence claim boundary
 
-The project can currently claim **real PostgreSQL + pgvector integration** and a **Tiger Cloud-ready connection path**. It can claim **Best Use of Tiger Data** only after the steps above have been completed against an actual Tiger Cloud service and the resulting evidence has been reviewed.
+The project can claim **real Tiger Cloud PostgreSQL + pgvector integration**: migration, seed, TLS, extension state, stored-vector dimensions and application-generated similarity searches were verified against the cloud service on October 10, 2026. A clean Tiger Cloud SQL-console screenshot is still required for the strongest visual submission evidence.
