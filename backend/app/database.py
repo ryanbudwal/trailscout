@@ -48,5 +48,19 @@ def search_places(pool, request, vector):
         if row['proximity_km'] is not None:
             row['proximity_km'] = round(row['proximity_km'], 2)
         # Grounded explanation: observable catalogue properties, never invented model reasoning.
-        row['reasons'] = [f"{row['duration_minutes']}-minute suggested outing", f"{row['difficulty'].capitalize()} terrain", ' · '.join(row['tags'][:3])]
+        duration_reason = (
+            f"Fits inside your {request.max_minutes}-minute limit"
+            if request.max_minutes is not None
+            else f"A {row['duration_minutes']}-minute suggested outing"
+        )
+        difficulty_reason = (
+            f"Matches your {request.difficulty} difficulty filter"
+            if request.difficulty is not None
+            else f"{row['difficulty'].capitalize()} terrain"
+        )
+        row['reasons'] = [
+            duration_reason,
+            difficulty_reason,
+            f"Known for {', '.join(row['tags'][:3])}",
+        ]
     return rows

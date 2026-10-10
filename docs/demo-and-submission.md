@@ -4,7 +4,7 @@
 
 The official [Implement AI-Powered Vector Search with pgvector challenge](https://www.mlh.com/events/global-hack-week-open-source-90/challenges/01a11b66-3a25-902e-3690-f9ea40cd5014), checked October 9, 2026, describes Tiger Data vector search with time and metadata filters and asks for a screenshot of and/or link to the vector database. This is the primary target. Check your signed-in form for its exact deadline, eligibility and required fields; do not rely solely on the original project-plan dates.
 
-The project's **local** implementation meets the technical demonstration path for real embeddings and pgvector. Tiger Cloud usage is still pending. The separate DEV competition is not treated as part of this submission, and its rules have not been verified here.
+The project's **local** implementation meets the technical demonstration path for real embeddings and pgvector. Tiger Cloud usage is still pending. DEV Touch Grass materials are documented separately in `dev-touch-grass-submission.md`, `dev-demo-script.md` and `submission-readiness.md`.
 
 ## 90-second demonstration
 
@@ -39,7 +39,7 @@ The API additionally supports an explicit `recorded_after` timestamp. For exampl
 2. Configure and verify your own Tiger Cloud service using `deployment.md`.
 3. Capture clean database evidence and your 60–90-second demo.
 4. Review the README, license, AI-tool disclosure and actual verification status. Replace any deployment placeholders with real verified details.
-5. Review the local repository for secrets before publication. `.env` is excluded. GitHub publication requires your explicit approval and has not been performed.
+5. Review the public repository and local working tree for secrets before every push. `.env` is excluded. The repository is public; cloud credentials and evidence files still require careful review.
 6. Open the official challenge, sign in, choose its submission action, and attach the evidence the form requests. Include the repository and demo only where allowed.
 7. Review the completed form yourself before submitting. No automatic submission is included in this project.
 

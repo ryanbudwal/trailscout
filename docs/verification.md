@@ -9,17 +9,21 @@ Verified on **October 10, 2026**, on this macOS Apple Silicon workspace. This re
 | Real model download and encoding | Pinned all-MiniLM-L6-v2 loaded on CPU; 384 dimensions; normalized vector tested |
 | PostgreSQL integration | Isolated PostgreSQL 17.6 with pgvector 0.8.1, listening only on 127.0.0.1:55432 |
 | Migration and seed | Schema applied, 24 actual model vectors inserted; repeat migration/seed succeeded with offline model cache |
-| Backend tests | **22 passed**; no fake model/database substitute in semantic and persistence tests |
+| Backend tests | **23 passed**; no fake model/database substitute in semantic, evaluation or persistence tests |
 | Frontend production build | Prettier check, TypeScript checking and Vite production build succeeded |
 | Browser tests | **6 passed**: 3 flows each on desktop Chromium (1440 × 1050) and mobile Chromium emulating iPhone 13 (390 × 664 CSS px) |
 | HTTP readiness | `/api/health` returned ready, 24 places, 384 dimensions, pgvector 0.8.1 |
 | Actual vector evidence | CLI emitted `local-evidence.json` from the real database and model |
+| Evidence command | Reported PostgreSQL 17.6, pgvector 0.8.1, 24 × 384-dimensional vectors, one pinned model and three distinct rankings; correctly reported local TLS as disabled |
+| Retrieval evaluation | Four-query run measured semantic/keyword relevant@3 at 2.25/2.25 and relevant@5 at 4.25/3.50; full limitations documented |
 | Visual inspection | Redesigned desktop and mobile screenshots reviewed; the cinematic hero, translucent search panel, map/cards, navigation, motion pause control and responsive single-column cards rendered without horizontal document overflow |
 | Dependency audit | npm install audit reported zero known vulnerabilities at installation; this is not a complete security audit |
+| GitHub Actions | Public run 1 succeeded on Linux for commit `00d8d40` on October 10, 2026 |
+| Challenge-window provenance | GitHub reports repository creation at 2026-10-10 05:46:58 UTC; first local commit is dated October 10, inside the October 5–11 build window |
 
 ### Backend coverage
 
-Three distinct semantic intents; normalized model dimensions; stored vector dimensions/model identity; hard duration/difficulty/radius constraints; missing/invalid coordinates; ingestion-time filtering; no-result cases; malicious input staying data; agreement of database cosine scores with direct vector math; journal persistence and ownership isolation; scoped deletion; invalid and nonexistent places; safe cookie flags; origin rejection; body/content-type limits; rate limiting; redacted model and database failures.
+Three distinct semantic intents; reproducible semantic-versus-keyword evaluation; normalized model dimensions; stored vector dimensions/model identity; hard duration/difficulty/radius constraints; missing/invalid coordinates; ingestion-time filtering; no-result cases; malicious input staying data; agreement of database cosine scores with direct vector math; journal persistence and ownership isolation; scoped deletion; invalid and nonexistent places; safe cookie flags; origin rejection; body/content-type limits; rate limiting; redacted model and database failures.
 
 The test runner reports one upstream Starlette deprecation warning about its httpx test transport. It does not fail the tests; transport migration can be handled with a future dependency upgrade.
 
@@ -45,7 +49,7 @@ The failure-handling browser test deliberately intercepts one request with HTTP 
 
 - **Tiger Cloud**: no service credentials were provided; no cloud provisioning, seed, query, extension installation or screenshot has been performed there.
 - **Docker/Compose/Linux CI**: configurations are supplied but have not been executed. Docker is not installed on the build computer. GitHub Actions has not run because the repository is local only.
-- **Public deployment**: no hosting, paid resources, public repository or hackathon submission was created.
+- **Public deployment**: no hosting, paid resources or hackathon submission was created. The GitHub repository is public.
 - **Browser/device coverage**: no physical phone testing, Safari/Firefox suite, formal accessibility audit, load test or independent security audit.
 - **Real location permission**: the geolocation control and failure path are implemented; obtaining the user's actual location was not requested during automated tests.
 - **Trail accuracy**: starter outing metrics and park points are editorial estimates, not field-verified route data. There are no live conditions or navigation geometries.

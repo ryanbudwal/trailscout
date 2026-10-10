@@ -7,6 +7,7 @@ from pydantic import ValidationError
 from app.main import app, limiter
 from app.models import Search
 from app.config import MODEL_KEY
+from app.evaluation import evaluate_retrieval, keyword_score
 
 @pytest.fixture(scope='module')
 def client():
@@ -50,6 +51,8 @@ def test_filters_and_distance(client):
         assert row['duration_minutes'] <= 45
         assert row['difficulty'] == 'easy'
         assert row['proximity_km'] <= 6
+        assert row['reasons'][0] == 'Fits inside your 45-minute limit'
+        assert row['reasons'][1] == 'Matches your easy difficulty filter'
     assert not search(client, latitude=0,longitude=0,radius_km=1)['results']
 
 def test_time_filter(client):
@@ -79,6 +82,15 @@ def test_cosine_matches_direct_math(client):
         db_vector=conn.execute('SELECT embedding FROM outdoor_places WHERE id=%s',[row['id']]).fetchone()['embedding'].to_numpy()
     expected=float(np.dot(vector,db_vector)/(np.linalg.norm(vector)*np.linalg.norm(db_vector)))
     assert row['similarity'] == pytest.approx(expected, abs=0.0001)
+
+def test_retrieval_evaluation_is_reproducible(client):
+    report = evaluate_retrieval(app.state.pool, app.state.encoder)
+    assert len(report['queries']) == 4
+    assert 0 <= report['summary']['semantic_mean_relevant_at_3'] <= 3
+    assert 0 <= report['summary']['keyword_mean_relevant_at_3'] <= 3
+    assert len({case['semantic']['top_5'][0]['name'] for case in report['queries']}) >= 3
+    example = {'name':'Tall trees', 'description':'A quiet forest', 'tags':['Shade']}
+    assert keyword_score('quiet trees', example) == 1
 
 def test_walk_lifecycle_and_isolation(client):
     client.get('/api/walks')

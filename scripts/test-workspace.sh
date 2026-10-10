@@ -9,5 +9,6 @@ export HF_HUB_OFFLINE=1
 export PYTHONPATH="$project_dir/backend"
 "$runtime_dir/venv/bin/python" -m pytest backend/tests -q
 cd frontend
+npm run format:check
 npm run build
 PLAYWRIGHT_BROWSERS_PATH="$runtime_dir/browsers" npm run test:e2e

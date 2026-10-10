@@ -19,12 +19,12 @@ No frontend API key is required. Never add a database URL to `VITE_*`, browser s
 The local app is tested. Tiger Cloud has **not** been provisioned or tested for this project; account creation, charges and credentials are controlled by you.
 
 1. Create or choose a Tiger Cloud PostgreSQL service in your account. Review any cost/trial limits in the console.
-2. Copy the service connection URL into your local `.env` using your editor or the deployment host's secret manager. Use `sslmode=verify-full` with the service's trusted CA configuration. If the provider requires a CA file, set `sslrootcert` to it. Do not disable certificate verification to make a connection work.
+2. Copy the service connection URL into your local `.env` using your editor or the deployment host's secret manager. Keep the provider's TLS parameters and require TLS. If the provider supplies a trusted CA configuration, use `sslmode=verify-full` with the appropriate `sslrootcert`. Do not disable certificate verification to make a connection work.
 3. With your migration/admin role, run `PYTHONPATH=backend python -m app.cli migrate`. This creates `vector`, the tables and indexes in the selected database.
 4. If supported on your service, run `db/tiger-extensions.sql` in its SQL editor. `vectorscale` is optional for this application's exact pgvector search. Record which extensions are actually installed.
 5. Run `PYTHONPATH=backend python -m app.cli seed`. This uploads the authored public catalogue and generated embeddings; it does not copy your local journal.
 6. Start the API using the Tiger connection and verify `/api/health`, three different searches, and a temporary journal entry/deletion. Use a separate test database for the full automated suite.
-7. Run `PYTHONPATH=backend python -m app.cli evidence > docs/tiger-evidence.json`. Review the output; it contains catalogue/model/search evidence, not the connection string. Do not rename local evidence to imply cloud usage.
+7. Run `PYTHONPATH=backend python -m app.cli evidence > tiger-evidence.json`. Review the output; it reports TLS, extension/dimension/model facts and three searches, without the connection string. Keep credential-bearing or unreviewed evidence outside the repository. Do not rename local evidence to imply cloud usage.
 8. In the Tiger SQL editor, run `db/tiger-evidence.sql` and capture the result table and service context without credentials. Follow the actual MLH form's current requirements.
 
 For least privilege, use a separate application role after migrations. Grant only `CONNECT` on the selected database, `USAGE` on schema `public`, `SELECT` on `outdoor_places`, and `SELECT, INSERT, DELETE` on `walks`. Do not grant extension creation or table modification privileges to the running web app. The CLI seed requires a separate role that can insert/update places and use the identity sequence. Role passwords should be set through your database provider's secure console flow.
@@ -43,7 +43,7 @@ Recommended sequence:
 6. Serve `uvicorn app.main:app --host 0.0.0.0 --port "$PORT"` with `PYTHONPATH=backend`, or use the container CMD. Configure `/api/health` as readiness check.
 7. Smoke-test real search, empty states, saved places and journal isolation. Public deployments need gateway-level throttling, operational monitoring and a journal retention policy.
 
-No deployment or repository publication has been performed. Get explicit approval before making a repository public, creating paid resources or submitting the project.
+The repository is public at `https://github.com/ryanbudwal/trailscout`. No deployment or contest submission has been performed. Get explicit approval before creating paid resources, deploying or submitting the project.
 
 ## Troubleshooting
 

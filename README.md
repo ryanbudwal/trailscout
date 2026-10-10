@@ -4,7 +4,7 @@
 
 Built for **MLH Global Hack Week: Hacktoberfest 2026**, with the [Implement AI-Powered Vector Search with pgvector challenge](https://www.mlh.com/events/global-hack-week-open-source-90/challenges/01a11b66-3a25-902e-3690-f9ea40cd5014) as the primary target.
 
-> Working local MVP. Tiger Cloud provisioning and submission remain user steps. Nothing has been published or submitted. See [verification](docs/verification.md) for tested functionality and limits.
+> Working local MVP in a public GitHub repository. Tiger Cloud provisioning, deployment and submission remain user steps. Nothing has been deployed or submitted. See [verification](docs/verification.md) for tested functionality and limits.
 
 ![TrailScout desktop interface](docs/desktop.png)
 
@@ -89,9 +89,9 @@ npm run test:e2e
 
 On the prepared computer, with the app running, `./scripts/test-workspace.sh` uses the existing local runtime and browser installation.
 
-The backend suite checks semantic relevance, normalization and dimensions, direct mathematical agreement with PostgreSQL cosine scores, filter correctness, empty results, malicious input, timestamp validation, anonymous-session isolation, persistence, deletion, body limits, origin restrictions and throttling. Browser tests cover desktop and mobile search, saved places, journal persistence, map access, errors, retries and layout overflow. See [verification](docs/verification.md) for actual results.
+The backend suite checks semantic relevance, the reproducible keyword comparison, normalization and dimensions, direct mathematical agreement with PostgreSQL cosine scores, filter correctness, empty results, malicious input, timestamp validation, anonymous-session isolation, persistence, deletion, body limits, origin restrictions and throttling. Browser tests cover desktop and mobile search, saved places, journal persistence, map access, errors, retries and layout overflow. See [verification](docs/verification.md) for actual results.
 
-GitHub Actions configuration is supplied in `.github/workflows/ci.yml`; it has not been run on GitHub because the repository is not published.
+GitHub Actions runs the same real-model/PostgreSQL integration path on Linux. Its first public run succeeded for commit `00d8d40` on October 10, 2026.
 
 ## Architecture
 
@@ -153,11 +153,16 @@ Time filtering is available through `recorded_after`, for example `"2026-10-09T0
 
 - [Deployment and safe environment setup](docs/deployment.md)
 - [90-second demo and MLH submission checklist](docs/demo-and-submission.md)
+- [DEV Touch Grass article draft](docs/dev-touch-grass-submission.md)
+- [DEV 60–90-second demo script](docs/dev-demo-script.md)
+- [Tiger Cloud migration and evidence runbook](docs/tiger-cloud-evidence.md)
+- [Measured semantic-versus-keyword evaluation](docs/retrieval-evaluation.md)
+- [Prize and submission readiness](docs/submission-readiness.md)
 - [Measured local database evidence](docs/local-evidence.json)
 - [Actual verification results and remaining work](docs/verification.md)
 - [Data and asset provenance](docs/data-and-credits.md)
 
-The next hackathon step is to run the same migration and seed against your own **Tiger Cloud** service, verify search there, and capture its database evidence. A local PostgreSQL demonstration is not proof of Tiger Cloud usage.
+The next hackathon step is to run the same migration and seed against your own **Tiger Cloud** service, verify TLS and search there, and capture its database evidence. A local PostgreSQL demonstration is not proof of Tiger Cloud usage.
 
 ## AI tools and licensing
 

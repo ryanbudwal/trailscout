@@ -15,6 +15,10 @@ For 24 records, an exact scan is simple and fast and avoids the recall trade-off
 
 The `vectorscale` extension script is optional for Tiger Cloud; merely installing it does not make the application use DiskANN. No Timescale hypertable is created in this MVP. The time filter refers to `outdoor_places.recorded_at`, which is the seed/ingestion time, not the time of a real observation or walk. Upserts retain original ingestion time.
 
+## Evaluation boundary
+
+`python -m app.cli evaluate` compares exact semantic retrieval with a documented token-overlap baseline over four natural-language requests. Relevance uses explicit authored tag sets. The October 10 local run tied at a mean 2.25 relevant results in the top three; semantic retrieval returned more relevant results by rank five (4.25 versus 3.50), while keyword retrieval had the higher reciprocal-rank result. This small evaluation supports a limited claim about broadening some natural-language retrieval, not universal superiority. See `docs/retrieval-evaluation.md` for the method and per-query results.
+
 ## Persistence and boundaries
 
 - Place IDs remain stable through seed upserts keyed by slug.
