@@ -1,0 +1,434 @@
+[
+  {
+    "slug": "high-park",
+    "name": "High Park woodland wander",
+    "area": "West Toronto",
+    "duration_minutes": 45,
+    "distance_km": 2.8,
+    "difficulty": "easy",
+    "latitude": 43.6465,
+    "longitude": -79.4637,
+    "scene": "forest",
+    "tags": [
+      "Woodland",
+      "Quiet moments",
+      "Birdwatching"
+    ],
+    "description": "A relaxed walk under a canopy of mature trees. Wooded paths and shady corners offer a peaceful break from the city; busier sections lead toward Grenadier Pond.",
+    "source_url": "https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-trails/"
+  },
+  {
+    "slug": "glen-stewart",
+    "name": "Glen Stewart Ravine",
+    "area": "The Beaches",
+    "duration_minutes": 35,
+    "distance_km": 1.7,
+    "difficulty": "moderate",
+    "latitude": 43.6767,
+    "longitude": -79.2948,
+    "scene": "forest",
+    "tags": [
+      "Ravine",
+      "Boardwalk",
+      "Shade"
+    ],
+    "description": "A small leafy ravine with a creek, wooden boardwalk and stairs. Tall trees and birdsong make this a contemplative forest escape. There are steep steps on the approach.",
+    "source_url": "https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-trails/"
+  },
+  {
+    "slug": "tommy-thompson",
+    "name": "Tommy Thompson Park",
+    "area": "Leslie Street Spit",
+    "duration_minutes": 90,
+    "distance_km": 6.0,
+    "difficulty": "easy",
+    "latitude": 43.6525,
+    "longitude": -79.322,
+    "scene": "coast",
+    "tags": [
+      "Birdwatching",
+      "Lake views",
+      "Open skies"
+    ],
+    "description": "An open peninsula on Lake Ontario with wetland habitat and long lake views. A good outing for watching waterbirds, wide horizons and photography. Exposed sections have little shade.",
+    "source_url": "https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-trails/"
+  },
+  {
+    "slug": "rouge",
+    "name": "Rouge woodland escape",
+    "area": "Scarborough",
+    "duration_minutes": 75,
+    "distance_km": 4.5,
+    "difficulty": "moderate",
+    "latitude": 43.818,
+    "longitude": -79.171,
+    "scene": "forest",
+    "tags": [
+      "Forest",
+      "River valley",
+      "Wildlife"
+    ],
+    "description": "Wooded paths in Rouge National Urban Park provide a longer escape among trees and river-valley scenery. Uneven terrain and hills suit walkers comfortable with a moderate outing.",
+    "source_url": "https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-trails/"
+  },
+  {
+    "slug": "evergreen",
+    "name": "Brick Works valley stroll",
+    "area": "Don Valley",
+    "duration_minutes": 40,
+    "distance_km": 2.3,
+    "difficulty": "easy",
+    "latitude": 43.684,
+    "longitude": -79.365,
+    "scene": "wetland",
+    "tags": [
+      "Ponds",
+      "Nature break",
+      "Birdwatching"
+    ],
+    "description": "A short nature break near Evergreen Brick Works with ponds, wetland plants and wooded valley surroundings. Pause to look for birds around the quarry garden paths.",
+    "source_url": "https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-trails/"
+  },
+  {
+    "slug": "sherwood",
+    "name": "Sherwood Park canopy walk",
+    "area": "Midtown",
+    "duration_minutes": 45,
+    "distance_km": 2.6,
+    "difficulty": "moderate",
+    "latitude": 43.715,
+    "longitude": -79.387,
+    "scene": "forest",
+    "tags": [
+      "Old trees",
+      "Shade",
+      "Ravine"
+    ],
+    "description": "Shaded wooded paths under mature trees make this a leafy neighbourhood escape. Hills and natural surfaces add a little effort to a quiet forest walk.",
+    "source_url": "https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-trails/"
+  },
+  {
+    "slug": "edwards",
+    "name": "Edwards Gardens pause",
+    "area": "North York",
+    "duration_minutes": 30,
+    "distance_km": 1.5,
+    "difficulty": "easy",
+    "latitude": 43.734,
+    "longitude": -79.359,
+    "scene": "meadow",
+    "tags": [
+      "Gardens",
+      "Flowers",
+      "Slow stroll"
+    ],
+    "description": "A gentle garden outing with seasonal flowers, landscaped paths and places to pause. A good choice for a short, unhurried nature break and botanical photography.",
+    "source_url": "https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-trails/"
+  },
+  {
+    "slug": "wilket",
+    "name": "Wilket Creek woodland",
+    "area": "North York",
+    "duration_minutes": 60,
+    "distance_km": 3.8,
+    "difficulty": "moderate",
+    "latitude": 43.724,
+    "longitude": -79.345,
+    "scene": "forest",
+    "tags": [
+      "Creek",
+      "Woodland",
+      "Shade"
+    ],
+    "description": "A wooded creek valley with winding paths and a leafy canopy. Enjoy running water, shade and a longer stroll away from street noise; some connections are hilly.",
+    "source_url": "https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-trails/"
+  },
+  {
+    "slug": "taylor-creek",
+    "name": "Taylor Creek ramble",
+    "area": "East York",
+    "duration_minutes": 60,
+    "distance_km": 4.0,
+    "difficulty": "easy",
+    "latitude": 43.697,
+    "longitude": -79.319,
+    "scene": "forest",
+    "tags": [
+      "Creek",
+      "Trees",
+      "Valley"
+    ],
+    "description": "A green valley corridor following Taylor Creek. A relaxed walk with tall trees, a creek and opportunities to stop for birds; shared paths may also have cyclists.",
+    "source_url": "https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-trails/"
+  },
+  {
+    "slug": "humber-bay",
+    "name": "Humber Bay shoreline",
+    "area": "Etobicoke",
+    "duration_minutes": 45,
+    "distance_km": 3.0,
+    "difficulty": "easy",
+    "latitude": 43.622,
+    "longitude": -79.477,
+    "scene": "coast",
+    "tags": [
+      "Lake views",
+      "Sunset",
+      "Photography"
+    ],
+    "description": "A shoreline outing with Lake Ontario views, small bays and skyline perspectives. Open water and evening light make it a good place for photography and a sunset stroll.",
+    "source_url": "https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-trails/"
+  },
+  {
+    "slug": "colonel-sam",
+    "name": "Colonel Samuel Smith Park",
+    "area": "Etobicoke",
+    "duration_minutes": 50,
+    "distance_km": 3.2,
+    "difficulty": "easy",
+    "latitude": 43.591,
+    "longitude": -79.513,
+    "scene": "wetland",
+    "tags": [
+      "Birdwatching",
+      "Wetlands",
+      "Lake views"
+    ],
+    "description": "Lakeshore paths, wetland edges and open water offer opportunities to watch birds. A gentle outing with changing views between reeds, trees and the lake.",
+    "source_url": "https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-trails/"
+  },
+  {
+    "slug": "bluffers",
+    "name": "Bluffer\u2019s Park lakeside",
+    "area": "Scarborough",
+    "duration_minutes": 40,
+    "distance_km": 2.4,
+    "difficulty": "easy",
+    "latitude": 43.706,
+    "longitude": -79.234,
+    "scene": "coast",
+    "tags": [
+      "Beach",
+      "Bluffs",
+      "Photography"
+    ],
+    "description": "Walk near the beach and marina with views toward the Scarborough Bluffs. Sandy shoreline and open lake scenery suit a relaxed outing. Stay on designated paths away from cliff edges.",
+    "source_url": "https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-trails/"
+  },
+  {
+    "slug": "guild",
+    "name": "Guild Park garden walk",
+    "area": "Scarborough",
+    "duration_minutes": 35,
+    "distance_km": 1.8,
+    "difficulty": "easy",
+    "latitude": 43.747,
+    "longitude": -79.193,
+    "scene": "meadow",
+    "tags": [
+      "Gardens",
+      "Sculpture",
+      "Trees"
+    ],
+    "description": "A garden stroll among architectural fragments, sculptures and mature trees. An easygoing place to mix outdoor time with art and photography.",
+    "source_url": "https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-trails/"
+  },
+  {
+    "slug": "morningside",
+    "name": "Morningside valley walk",
+    "area": "Scarborough",
+    "duration_minutes": 60,
+    "distance_km": 3.6,
+    "difficulty": "moderate",
+    "latitude": 43.788,
+    "longitude": -79.19,
+    "scene": "forest",
+    "tags": [
+      "River",
+      "Woodland",
+      "Picnic"
+    ],
+    "description": "A broad green valley along Highland Creek, with wooded surroundings and picnic space. A longer walk for trees, river scenery and a relaxed break outdoors.",
+    "source_url": "https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-trails/"
+  },
+  {
+    "slug": "cedarvale",
+    "name": "Cedarvale green escape",
+    "area": "Midtown",
+    "duration_minutes": 40,
+    "distance_km": 2.6,
+    "difficulty": "easy",
+    "latitude": 43.689,
+    "longitude": -79.428,
+    "scene": "meadow",
+    "tags": [
+      "Meadow",
+      "Ravine",
+      "Neighbourhood"
+    ],
+    "description": "A neighbourhood green corridor mixing open lawns and a treed ravine. A convenient option for a brisk walk or an easy midday break with patches of shade.",
+    "source_url": "https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-trails/"
+  },
+  {
+    "slug": "beltline",
+    "name": "Beltline tree-lined walk",
+    "area": "Midtown",
+    "duration_minutes": 50,
+    "distance_km": 3.5,
+    "difficulty": "easy",
+    "latitude": 43.7,
+    "longitude": -79.413,
+    "scene": "forest",
+    "tags": [
+      "Trees",
+      "Urban escape",
+      "Shared path"
+    ],
+    "description": "A tree-lined former railway corridor for a steady walk through the city. A leafy, mostly gentle route shared with runners and cyclists, with road crossings along the way.",
+    "source_url": "https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-trails/"
+  },
+  {
+    "slug": "sunnybrook",
+    "name": "Sunnybrook green loop",
+    "area": "North York",
+    "duration_minutes": 55,
+    "distance_km": 3.5,
+    "difficulty": "easy",
+    "latitude": 43.72,
+    "longitude": -79.364,
+    "scene": "meadow",
+    "tags": [
+      "Open spaces",
+      "Trees",
+      "Picnic"
+    ],
+    "description": "Open parkland and wooded edges offer room for a comfortable outdoor walk. Combine a gentle stroll with a picnic or a pause among the trees.",
+    "source_url": "https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-trails/"
+  },
+  {
+    "slug": "earl-bales",
+    "name": "Earl Bales ravine outing",
+    "area": "North York",
+    "duration_minutes": 60,
+    "distance_km": 3.4,
+    "difficulty": "moderate",
+    "latitude": 43.753,
+    "longitude": -79.433,
+    "scene": "forest",
+    "tags": [
+      "Hills",
+      "Woodland",
+      "Ravine"
+    ],
+    "description": "A mix of open parkland and wooded valley slopes. Hills provide a more energetic outing while mature trees offer shade and a forest atmosphere.",
+    "source_url": "https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-trails/"
+  },
+  {
+    "slug": "toronto-islands",
+    "name": "Island shoreline wander",
+    "area": "Toronto Islands",
+    "duration_minutes": 75,
+    "distance_km": 4.6,
+    "difficulty": "easy",
+    "latitude": 43.62,
+    "longitude": -79.378,
+    "scene": "coast",
+    "tags": [
+      "Lake views",
+      "Beach",
+      "Day escape"
+    ],
+    "description": "A leisurely island outing with lakeshore views, beaches and broad open skies. Reaching the islands requires a ferry or water taxi; crossing time is not included in the walk estimate.",
+    "source_url": "https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-trails/"
+  },
+  {
+    "slug": "trillium",
+    "name": "Trillium Park pause",
+    "area": "Waterfront",
+    "duration_minutes": 25,
+    "distance_km": 1.4,
+    "difficulty": "easy",
+    "latitude": 43.628,
+    "longitude": -79.412,
+    "scene": "coast",
+    "tags": [
+      "Skyline",
+      "Sunset",
+      "Short break"
+    ],
+    "description": "A short lakeside escape with skyline views and a landscaped waterfront path. A compact choice for fresh air, evening light and a quick reset outdoors.",
+    "source_url": "https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-trails/"
+  },
+  {
+    "slug": "music-garden",
+    "name": "Toronto Music Garden",
+    "area": "Harbourfront",
+    "duration_minutes": 20,
+    "distance_km": 0.8,
+    "difficulty": "easy",
+    "latitude": 43.637,
+    "longitude": -79.394,
+    "scene": "meadow",
+    "tags": [
+      "Gardens",
+      "Waterfront",
+      "Short break"
+    ],
+    "description": "A small landscaped waterfront garden with winding paths and seasonal planting. Good for an unhurried twenty-minute break, flowers and quiet observation.",
+    "source_url": "https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-trails/"
+  },
+  {
+    "slug": "crothers",
+    "name": "Crothers Woods hillside",
+    "area": "Don Valley",
+    "duration_minutes": 65,
+    "distance_km": 3.8,
+    "difficulty": "challenging",
+    "latitude": 43.7,
+    "longitude": -79.358,
+    "scene": "forest",
+    "tags": [
+      "Hills",
+      "Forest",
+      "Natural paths"
+    ],
+    "description": "Wooded slopes with uneven natural paths and changing elevation. A more demanding forest outing with a dense canopy; watch for cyclists on shared trails.",
+    "source_url": "https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-trails/"
+  },
+  {
+    "slug": "humber-arboretum",
+    "name": "Humber Arboretum gardens",
+    "area": "North Etobicoke",
+    "duration_minutes": 45,
+    "distance_km": 2.5,
+    "difficulty": "easy",
+    "latitude": 43.733,
+    "longitude": -79.607,
+    "scene": "meadow",
+    "tags": [
+      "Gardens",
+      "Trees",
+      "Nature study"
+    ],
+    "description": "Gardens and wooded surroundings beside the Humber River. A relaxed outing for observing plants, seasonal colours and birds, with time to stop and look around.",
+    "source_url": "https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-trails/"
+  },
+  {
+    "slug": "east-point",
+    "name": "East Point birding walk",
+    "area": "Scarborough",
+    "duration_minutes": 50,
+    "distance_km": 3.0,
+    "difficulty": "easy",
+    "latitude": 43.767,
+    "longitude": -79.152,
+    "scene": "wetland",
+    "tags": [
+      "Birdwatching",
+      "Meadow",
+      "Lake views"
+    ],
+    "description": "Meadows, shrubs and lake views create an inviting setting for birdwatching and open-sky walking. Enjoy the natural shoreline setting while staying on designated paths.",
+    "source_url": "https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-trails/"
+  }
+]

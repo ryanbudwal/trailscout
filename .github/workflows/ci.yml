@@ -1,0 +1,48 @@
+name: Test TrailScout
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: pgvector/pgvector:0.8.1-pg17
+        env:
+          POSTGRES_USER: trailscout
+          POSTGRES_PASSWORD: test-only
+          POSTGRES_DB: trailscout_test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U trailscout -d trailscout_test"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      DATABASE_URL: postgresql://trailscout:test-only@localhost:5432/trailscout_test
+      PYTHONPATH: backend
+      HF_HOME: .cache/huggingface
+      HF_HUB_DISABLE_TELEMETRY: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu
+      - run: pip install -r backend/requirements-lock.txt
+      - run: python -m app.cli migrate && python -m app.cli seed
+      - run: pytest backend/tests -q
+      - run: npm ci && npm run format:check && npm run build && npx playwright install --with-deps chromium
+        working-directory: frontend
+      - run: |
+          uvicorn app.main:app --host 127.0.0.1 --port 8000 > /tmp/trailscout-api.log 2>&1 &
+          for attempt in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:8000/api/health; then break; fi
+            sleep 2
+          done
+          curl -fsS http://127.0.0.1:8000/api/health
+      - run: npm run test:e2e
+        working-directory: frontend

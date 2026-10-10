@@ -1,0 +1,47 @@
+# Local development only. Deploy with a separate Tiger Cloud DATABASE_URL.
+services:
+  db:
+    image: pgvector/pgvector:0.8.1-pg17
+    environment:
+      POSTGRES_USER: trailscout
+      POSTGRES_PASSWORD: local-development-only
+      POSTGRES_DB: trailscout
+      POSTGRES_INITDB_ARGS: --encoding=UTF8
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U trailscout -d trailscout"]
+      interval: 5s
+      timeout: 3s
+      retries: 15
+  setup:
+    build: .
+    image: trailscout-local
+    environment:
+      DATABASE_URL: postgresql://trailscout:local-development-only@db:5432/trailscout
+    command: ["sh", "-c", "python -m app.cli migrate && python -m app.cli seed"]
+    depends_on:
+      db:
+        condition: service_healthy
+  web:
+    build: .
+    image: trailscout-local
+    environment:
+      DATABASE_URL: postgresql://trailscout:local-development-only@db:5432/trailscout
+      ALLOWED_ORIGINS: http://localhost:8000,http://127.0.0.1:8000
+      COOKIE_SECURE: "false"
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      setup:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health')"]
+      interval: 15s
+      timeout: 10s
+      start_period: 60s
+      retries: 5
+volumes:
+  pgdata:

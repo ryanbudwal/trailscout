@@ -1,0 +1,45 @@
+{
+  "extensions": [
+    {
+      "extname": "vector",
+      "extversion": "0.8.1"
+    }
+  ],
+  "catalogue": {
+    "places": 24,
+    "dimensions": 384
+  },
+  "model": "sentence-transformers/all-MiniLM-L6-v2@1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+  "query": {
+    "query": "a peaceful shaded walk among trees",
+    "max_minutes": 60,
+    "difficulty": "easy",
+    "latitude": null,
+    "longitude": null,
+    "radius_km": null,
+    "recorded_after": null,
+    "limit": 12
+  },
+  "results": [
+    {
+      "name": "Beltline tree-lined walk",
+      "similarity": 0.524
+    },
+    {
+      "name": "Sunnybrook green loop",
+      "similarity": 0.5161
+    },
+    {
+      "name": "High Park woodland wander",
+      "similarity": 0.508
+    },
+    {
+      "name": "Guild Park garden walk",
+      "similarity": 0.4605
+    },
+    {
+      "name": "East Point birding walk",
+      "similarity": 0.383
+    }
+  ]
+}
