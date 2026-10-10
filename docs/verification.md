@@ -14,7 +14,7 @@ Verified on **October 10, 2026**, on this macOS Apple Silicon workspace. This re
 | Browser tests | **6 passed**: 3 flows each on desktop Chromium (1440 × 1050) and mobile Chromium emulating iPhone 13 (390 × 664 CSS px) |
 | HTTP readiness | `/api/health` returned ready, 24 places, 384 dimensions, pgvector 0.8.1 |
 | Actual vector evidence | CLI emitted `local-evidence.json` from the real database and model |
-| Visual inspection | Desktop and mobile screenshots reviewed; no horizontal document overflow in browser assertions |
+| Visual inspection | Redesigned desktop and mobile screenshots reviewed; the cinematic hero, translucent search panel, map/cards, navigation, motion pause control and responsive single-column cards rendered without horizontal document overflow |
 | Dependency audit | npm install audit reported zero known vulnerabilities at installation; this is not a complete security audit |
 
 ### Backend coverage
@@ -27,6 +27,8 @@ The test runner reports one upstream Starlette deprecation warning about its htt
 
 Actual UI → FastAPI → model/PostgreSQL requests; search filters; result rendering; bookmarking and localStorage persistence across reload; detail dialog; journal creation and reload persistence; deletion; no-match reset; named map pin keyboard activation; Escape dismissal; no page errors in the primary flow; no horizontal overflow; simulated service failure displaying a real error and successful retry after recovery.
 
+The October 10 visual redesign was exercised by the same suite after the navigation, hero, search surface, results field and responsive card layout changed. The motion control has an accessible pressed state, and the CSS still honors `prefers-reduced-motion`.
+
 The failure-handling browser test deliberately intercepts one request with HTTP 503. It is an error-path test, not evidence of live model/database success; the other flows use the actual service.
 
 ## Fixed during verification
@@ -37,6 +39,7 @@ The failure-handling browser test deliberately intercepts one request with HTTP 
 - Added explicit Enter/Space activation and meaningful labels to map pins.
 - Made a failed first search retry the same query instead of silently falling back to browsing.
 - Increased small supporting text for mobile readability; bundled fonts for predictable loading.
+- Reworked the frontend into an editorial, nature-led system with a top navigation, full-height hero, pauseable motion, bright section ribbon, immersive map/results field and responsive color-blocked journal/about views.
 
 ## Not verified / not implemented
 

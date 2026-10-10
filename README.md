@@ -16,7 +16,8 @@ Built for **MLH Global Hack Week: Hacktoberfest 2026**, with the [Implement AI-P
 - **Explore:** 24 authored outings at real Toronto-area parks, interactive Leaflet/OpenStreetMap pins, place details, and external location links.
 - **Save:** bookmarks persist in this browser's local storage.
 - **Field journal:** completed dates, minutes, notes, aggregate totals, and deletion persist in PostgreSQL, isolated by an anonymous browser session.
-- **Responsive design:** keyboard controls, native focus-trapping detail dialogs, reduced-motion support, local fonts, and original nature illustrations.
+- **Responsive editorial design:** a cinematic discovery hero, translucent search console, bold color fields, immersive result cards, keyboard controls, native focus-trapping detail dialogs, local fonts, and original nature illustrations.
+- **Considerate motion:** slow hero drift and entrance transitions can be paused in the interface and are disabled when the operating system requests reduced motion.
 
 **Scope:** It is a place finder, not a route-navigation system. Durations, walking lengths, difficulty and map points are editorial estimates. No route geometries, live closures, weather, driving times, guaranteed accessibility or availability. Natural-language text drives semantic ranking; use the explicit controls for hard limits. Only Toronto-area places are in the starter catalogue.
 
@@ -122,6 +123,7 @@ flowchart LR
 4. **Filters and meaning have different jobs.** The model understands text similarity; SQL enforces constraints. Dates represent catalogue ingestion, not live trail reports.
 5. **Grounded explanations stay honest.** Durations, difficulty and tags explain the outing's characteristics. A score is raw cosine similarity, not a confidence percentage.
 6. **One service simplifies deployment.** FastAPI serves the built React files and API under one origin. No database secret goes to the browser.
+7. **The visual system supports the demo.** Large type establishes the product promise immediately; the search console stays above the fold; the map and recommendation cards share one dark content field; bright accents mark actions and semantic-search evidence. The supplied Adobe MAX and environmental dashboard references informed rhythm and hierarchy only. Their imagery, logos and interface assets are not included.
 
 ## Repository layout
 

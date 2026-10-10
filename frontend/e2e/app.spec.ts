@@ -79,7 +79,7 @@ test("empty search, reset, map detail, keyboard dismissal, responsive width", as
     ),
   ).toBe(true);
   await page
-    .getByRole("heading", { name: "Your next little escape." })
+    .getByRole("heading", { name: "Find your outside." })
     .scrollIntoViewIfNeeded();
   await page.screenshot({
     path: `test-results/explore-${test.info().project.name}.png`,

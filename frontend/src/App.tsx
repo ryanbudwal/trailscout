@@ -22,6 +22,8 @@ import {
   LoaderCircle,
   ChevronRight,
   Info,
+  Pause,
+  Play,
 } from "lucide-react";
 import { Scene } from "./Scene";
 import { TrailMap } from "./Map";
@@ -64,6 +66,7 @@ export default function App() {
   const [logging, setLogging] = useState(false);
   const [logError, setLogError] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [motionPaused, setMotionPaused] = useState(false);
   const dialog = useRef<HTMLDialogElement>(null);
   const requestId = useRef(0);
   const refreshWalks = useCallback(async () => {
@@ -284,7 +287,7 @@ export default function App() {
           <small>Built for Global Hack Week 2026</small>
         </div>
       </aside>
-      <div className="workspace">
+      <div className={`workspace ${motionPaused ? "motion-paused" : ""}`}>
         <header className="topbar">
           <span className="breadcrumb">
             Your outdoors, discovered <ChevronRight size={13} />{" "}
@@ -301,144 +304,167 @@ export default function App() {
           <span className="region">
             <MapPin size={15} /> Toronto & surrounding nature
           </span>
+          <button
+            className="motion-toggle"
+            type="button"
+            onClick={() => setMotionPaused((paused) => !paused)}
+            aria-label={motionPaused ? "Play animations" : "Pause animations"}
+            aria-pressed={motionPaused}
+          >
+            {motionPaused ? <Play size={14} /> : <Pause size={14} />}
+            <span>{motionPaused ? "Play motion" : "Pause motion"}</span>
+          </button>
         </header>
         <main id="main">
           {(tab === "explore" || tab === "saved") && (
             <>
               {tab === "explore" ? (
                 <>
-                  <section className="intro">
-                    <div>
-                      <div className="eyebrow">
-                        <span /> LESS SCROLLING. MORE STROLLING.
+                  <div className="hero-stage">
+                    <Scene hero />
+                    <section className="intro">
+                      <div>
+                        <div className="eyebrow">
+                          <span /> AI-POWERED OUTDOOR DISCOVERY
+                        </div>
+                        <h1>
+                          Find your
+                          <br />
+                          <em>outside.</em>
+                        </h1>
+                        <p>Describe the feeling. TrailScout finds the place.</p>
                       </div>
-                      <h1>
-                        Your next little <em>escape.</em>
-                      </h1>
-                      <p>
-                        A quiet forest. A lakeside pause. Tell us what sounds
-                        good.
-                      </p>
-                    </div>
-                    <div className="intro-stamp">
-                      <Leaf size={20} />
-                      <span>
-                        Find your
-                        <br />
-                        <strong>outside feeling</strong>
-                      </span>
-                    </div>
-                  </section>
-                  <section
-                    className="discovery"
-                    aria-label="Find an outdoor adventure"
-                  >
-                    <div className="search-heading">
-                      <span className="spark-icon">
-                        <Sparkles size={19} />
-                      </span>
-                      <span>Where does your mind want to wander?</span>
-                      <span className="model-tag">OPEN-SOURCE AI</span>
-                    </div>
-                    <form
-                      onSubmit={(e) => {
-                        e.preventDefault();
-                        void runSearch();
-                      }}
-                    >
-                      <div className="search-box">
-                        <Search size={22} />
-                        <input
-                          aria-label="Describe your ideal outing"
-                          maxLength={500}
-                          placeholder="A peaceful 45-minute walk, surrounded by trees…"
-                          value={query}
-                          onChange={(e) => setQuery(e.target.value)}
-                        />
-                        <button className="primary" disabled={loading}>
-                          {loading ? (
-                            <LoaderCircle className="spin" size={18} />
-                          ) : (
-                            <Sparkles size={17} />
-                          )}
-                          <span>Find my escape</span>
-                          <ArrowRight size={17} />
-                        </button>
-                      </div>
-                      <div className="filters">
-                        <span className="filter-caption">
-                          <SlidersHorizontal size={16} /> Make it yours
+                      <div className="intro-stamp">
+                        <Leaf size={20} />
+                        <span>
+                          24 places
+                          <br />
+                          <strong>one honest dataset</strong>
                         </span>
-                        <label>
-                          <Clock size={15} />
-                          <select
-                            aria-label="Maximum walking time"
-                            value={minutes}
-                            onChange={(e) => setMinutes(e.target.value)}
-                          >
-                            <option value="">Any duration</option>
-                            <option value="30">Up to 30 min</option>
-                            <option value="45">Up to 45 min</option>
-                            <option value="60">Up to 1 hour</option>
-                            <option value="90">Up to 90 min</option>
-                          </select>
-                        </label>
-                        <label>
-                          <Mountain size={15} />
-                          <select
-                            aria-label="Difficulty"
-                            value={difficulty}
-                            onChange={(e) => setDifficulty(e.target.value)}
-                          >
-                            <option value="">Any difficulty</option>
-                            <option value="easy">Easy</option>
-                            <option value="moderate">Moderate</option>
-                            <option value="challenging">Challenging</option>
-                          </select>
-                        </label>
-                        <label>
-                          <MapPin size={15} />
-                          <select
-                            aria-label="Distance radius"
-                            value={radius}
-                            onChange={(e) => setRadius(e.target.value)}
-                          >
-                            <option value="">Any distance</option>
-                            <option value="5">Within 5 km</option>
-                            <option value="10">Within 10 km</option>
-                            <option value="25">Within 25 km</option>
-                            <option value="50">Within 50 km</option>
-                          </select>
-                        </label>
-                        <button
-                          type="button"
-                          className="location-btn"
-                          onClick={locate}
-                          disabled={locating}
-                        >
-                          <LocateFixed size={15} />
-                          {locating ? "Locating…" : location.label}
-                        </button>
                       </div>
-                    </form>
-                    <div className="suggestions">
-                      <span>A little inspiration</span>
-                      {[
-                        ["🌿", "Somewhere quiet among trees"],
-                        ["🌊", "A sunset by the water"],
-                        ["🐦", "Birdwatching and wetlands"],
-                      ].map(([emoji, text]) => (
-                        <button
-                          disabled={loading}
-                          key={text}
-                          onClick={() => void runSearch(text)}
-                        >
-                          {emoji} {text}
-                          <ArrowUpRight size={12} />
-                        </button>
-                      ))}
-                    </div>
-                  </section>
+                    </section>
+                    <section
+                      className="discovery"
+                      aria-label="Find an outdoor adventure"
+                    >
+                      <div className="search-heading">
+                        <span className="spark-icon">
+                          <Sparkles size={19} />
+                        </span>
+                        <span>Where does your mind want to wander?</span>
+                        <span className="model-tag">OPEN-SOURCE AI</span>
+                      </div>
+                      <form
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                          void runSearch();
+                        }}
+                      >
+                        <div className="search-box">
+                          <Search size={22} />
+                          <input
+                            aria-label="Describe your ideal outing"
+                            maxLength={500}
+                            placeholder="A peaceful 45-minute walk, surrounded by trees…"
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                          />
+                          <button className="primary" disabled={loading}>
+                            {loading ? (
+                              <LoaderCircle className="spin" size={18} />
+                            ) : (
+                              <Sparkles size={17} />
+                            )}
+                            <span>Find my escape</span>
+                            <ArrowRight size={17} />
+                          </button>
+                        </div>
+                        <div className="filters">
+                          <span className="filter-caption">
+                            <SlidersHorizontal size={16} /> Make it yours
+                          </span>
+                          <label>
+                            <Clock size={15} />
+                            <select
+                              aria-label="Maximum walking time"
+                              value={minutes}
+                              onChange={(e) => setMinutes(e.target.value)}
+                            >
+                              <option value="">Any duration</option>
+                              <option value="30">Up to 30 min</option>
+                              <option value="45">Up to 45 min</option>
+                              <option value="60">Up to 1 hour</option>
+                              <option value="90">Up to 90 min</option>
+                            </select>
+                          </label>
+                          <label>
+                            <Mountain size={15} />
+                            <select
+                              aria-label="Difficulty"
+                              value={difficulty}
+                              onChange={(e) => setDifficulty(e.target.value)}
+                            >
+                              <option value="">Any difficulty</option>
+                              <option value="easy">Easy</option>
+                              <option value="moderate">Moderate</option>
+                              <option value="challenging">Challenging</option>
+                            </select>
+                          </label>
+                          <label>
+                            <MapPin size={15} />
+                            <select
+                              aria-label="Distance radius"
+                              value={radius}
+                              onChange={(e) => setRadius(e.target.value)}
+                            >
+                              <option value="">Any distance</option>
+                              <option value="5">Within 5 km</option>
+                              <option value="10">Within 10 km</option>
+                              <option value="25">Within 25 km</option>
+                              <option value="50">Within 50 km</option>
+                            </select>
+                          </label>
+                          <button
+                            type="button"
+                            className="location-btn"
+                            onClick={locate}
+                            disabled={locating}
+                          >
+                            <LocateFixed size={15} />
+                            {locating ? "Locating…" : location.label}
+                          </button>
+                        </div>
+                      </form>
+                      <div className="suggestions">
+                        <span>Try a feeling</span>
+                        {[
+                          ["🌿", "Somewhere quiet among trees"],
+                          ["🌊", "A sunset by the water"],
+                          ["🐦", "Birdwatching and wetlands"],
+                        ].map(([emoji, text]) => (
+                          <button
+                            disabled={loading}
+                            key={text}
+                            onClick={() => void runSearch(text)}
+                          >
+                            {emoji} {text}
+                            <ArrowUpRight size={12} />
+                          </button>
+                        ))}
+                      </div>
+                    </section>
+                  </div>
+                  <div className="mood-ribbon" aria-label="Outdoor inspiration">
+                    <span>WALK SLOWLY</span>
+                    <i />
+                    <span>NOTICE MORE</span>
+                    <i />
+                    <span>TOUCH GRASS</span>
+                    <i />
+                    <span>FOLLOW THE WATER</span>
+                    <i />
+                    <span>LEAVE IT BETTER</span>
+                  </div>
                 </>
               ) : (
                 <section className="intro">
