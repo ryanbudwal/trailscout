@@ -1,41 +1,170 @@
-# TrailScout AI
+<div align="center">
 
-**A little closer to outside.** Describe the outdoor break you want. TrailScout finds relevant Toronto-area nature outings using an open-weight embedding model and real PostgreSQL vector search.
+<h1>TrailScout AI</h1>
+<h3>Describe the feeling. Find your outside.</h3>
 
-Built for **MLH Global Hack Week: Hacktoberfest 2026**, with the [Implement AI-Powered Vector Search with pgvector challenge](https://www.mlh.com/events/global-hack-week-open-source-90/challenges/01a11b66-3a25-902e-3690-f9ea40cd5014) as the primary target.
+<p>TrailScout turns a natural-language request into a short list of Toronto-area outdoor places using an open-weight embedding model and real vector retrieval in PostgreSQL.</p>
 
-> Working local MVP in a public GitHub repository. Tiger Cloud provisioning, deployment and submission remain user steps. Nothing has been deployed or submitted. See [verification](docs/verification.md) for tested functionality and limits.
+<p><strong>Less screen time. More time outdoors.</strong></p>
 
-![TrailScout desktop interface](docs/desktop.png)
+<p><a href="https://youtu.be/hJdTeWRmuCA">Watch the product demo</a> · <a href="https://dev.to/ryanbudwal14/trailscout-ai-describe-the-feeling-then-go-outside-ik">Read the DEV submission</a> · <a href="docs/architecture.md">Explore the architecture</a></p>
 
-## What it does
+<a href="https://dev.to/challenges/hacktoberfest-week1-2026-10-05"><img src="https://img.shields.io/badge/Hacktoberfest_2026-Touch_Grass-D2FF4F?style=flat-square&labelColor=10251C" alt="Hacktoberfest 2026 Touch Grass" /></a>
+<img src="https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=10251C" alt="React 19" />
+<img src="https://img.shields.io/badge/TypeScript-typed-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" />
+<img src="https://img.shields.io/badge/FastAPI-Python_3.13-009688?style=flat-square&logo=fastapi&logoColor=white" alt="FastAPI with Python 3.13" />
+<img src="https://img.shields.io/badge/MiniLM-384d_embeddings-FF9D45?style=flat-square" alt="MiniLM 384-dimensional embeddings" />
+<img src="https://img.shields.io/badge/Tiger_Cloud-PostgreSQL-FF6F61?style=flat-square" alt="Tiger Cloud PostgreSQL" />
+<img src="https://img.shields.io/badge/pgvector-0.8.7-336791?style=flat-square&logo=postgresql&logoColor=white" alt="pgvector 0.8.7" />
 
-- **Semantic discovery:** MiniLM transforms requests such as “somewhere quiet under a leafy canopy” into 384-dimensional embeddings. PostgreSQL/pgvector ranks relevant place descriptions by cosine similarity.
-- **Hard filters:** maximum walking time, difficulty, and straight-line radius from downtown Toronto or an explicitly requested browser location. A timezone-aware `recorded_after` API filter demonstrates time context.
-- **Transparent results:** real cosine scores, model details, query timing, and explanations built from catalogue facts. No fake percentages or generated trail claims.
-- **Explore:** 24 authored outings at real Toronto-area parks, interactive Leaflet/OpenStreetMap pins, place details, and external location links.
-- **Save:** bookmarks persist in this browser's local storage.
-- **Field journal:** completed dates, minutes, notes, aggregate totals, and deletion persist in PostgreSQL, isolated by an anonymous browser session.
-- **Responsive editorial design:** a cinematic discovery hero, translucent search console, bold color fields, immersive result cards, keyboard controls, native focus-trapping detail dialogs, local fonts, and original nature illustrations.
-- **Considerate motion:** slow hero drift and entrance transitions can be paused in the interface and are disabled when the operating system requests reduced motion.
+<p><a href="#product-overview">Overview</a> · <a href="#video-demonstration">Demo</a> · <a href="#features">Features</a> · <a href="#how-the-ai-works">AI retrieval</a> · <a href="#verified-tiger-cloud-integration">Tiger Cloud</a> · <a href="#technical-architecture">Architecture</a> · <a href="#quick-start">Quick start</a> · <a href="#testing-and-reliability">Testing</a></p>
 
-**Scope:** It is a place finder, not a route-navigation system. Durations, walking lengths, difficulty and map points are editorial estimates. No route geometries, live closures, weather, driving times, guaranteed accessibility or availability. Natural-language text drives semantic ranking; use the explicit controls for hard limits. Only Toronto-area places are in the starter catalogue.
+</div>
 
-## Run on this prepared computer
+---
 
-From this `trailscout` directory:
+![TrailScout desktop interface showing natural-language outdoor discovery, recommendations, and an interactive map](docs/desktop.png)
+
+## Product overview
+
+Sometimes the hardest part of going outside is deciding where to go.
+
+TrailScout lets someone describe the experience they want—**“Somewhere by the water to watch the sunset”**—then retrieves authored Toronto-area suggestions that are close in meaning. Exact controls for duration, difficulty, and distance keep practical constraints separate from the semantic ranking.
+
+The result is a focused place finder: discover an outing, understand why it fits, open its approximate location, and leave the screen behind. TrailScout does not generate routes or improvise trail advice. Every recommendation and explanation is grounded in its 24-place catalogue.
+
+> **Product boundary:** TrailScout is an outdoor place finder, not a navigation or safety system. Durations, distances, difficulty, and map points are editorial estimates. It does not provide route geometries, live closures, weather, driving times, guaranteed accessibility, or availability.
+
+## Video demonstration
+
+<div align="center">
+
+[![Watch the TrailScout AI product demonstration](https://img.youtube.com/vi/hJdTeWRmuCA/maxresdefault.jpg)](https://youtu.be/hJdTeWRmuCA)
+
+**[Watch TrailScout search, filter, explain, and map real recommendations →](https://youtu.be/hJdTeWRmuCA)**
+
+</div>
+
+The application itself is not publicly hosted. The video is the working product demonstration submitted with the DEV article; Tiger Cloud verification is documented separately below.
+
+## Features
+
+| Experience                     | Implemented behavior                                                                                                  |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| **Natural-language discovery** | MiniLM embeds requests such as “a quiet walk underneath tall trees” and pgvector ranks related place descriptions.    |
+| **Practical filters**          | Duration, difficulty, and straight-line radius are enforced as parameterized SQL constraints.                         |
+| **Authored recommendations**   | 24 Toronto-area destinations with grounded descriptions, tags, coordinates, and editorial estimates.                  |
+| **Interactive map**            | Leaflet and OpenStreetMap provide approximate locations, keyboard-accessible pins, and external location links.       |
+| **Transparent retrieval**      | The interface exposes cosine similarity, the pinned model, query timing, and catalogue-backed reasons for each match. |
+| **Saved places**               | Bookmarks persist in the current browser.                                                                             |
+| **Field journal**              | Completed dates, minutes, notes, aggregate totals, and deletion persist in PostgreSQL under an anonymous session.     |
+| **Responsive interface**       | Desktop and mobile layouts preserve the search, recommendation, map, and journal flows.                               |
+| **Motion control**             | Atmospheric movement can be paused and respects the operating system's reduced-motion preference.                     |
+
+## How the AI works
+
+```mermaid
+flowchart LR
+    A["Natural-language request"] --> B["FastAPI validation"]
+    B --> C["MiniLM sentence embedding<br/>384 dimensions"]
+    C --> D[(Tiger Cloud PostgreSQL<br/>pgvector)]
+    B --> E["Duration · difficulty · radius"]
+    E --> D
+    D --> F["Cosine similarity<br/>+ SQL filtering"]
+    F --> G["Ranked authored<br/>outdoor recommendations"]
+```
+
+TrailScout uses [`sentence-transformers/all-MiniLM-L6-v2`](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2), an Apache-2.0 open-weight model pinned to revision `1110a243fdf4706b3f48f1d95db1a4f5529b4d41`.
+
+At seed time, MiniLM converts each destination's name, description, and tags into a normalized 384-dimensional vector. At search time, the same model embeds the request. PostgreSQL then applies exact filters and ranks stored vectors with pgvector cosine distance.
+
+This is retrieval, not a generative chatbot. The model helps match meanings; it does not invent trails, conditions, or recommendations outside the catalogue. If inference or the database fails, TrailScout reports the failure instead of returning fabricated results.
+
+## Verified Tiger Cloud integration
+
+TrailScout stores both destination metadata and MiniLM embeddings in a dedicated Tiger Cloud PostgreSQL service. The verified integration uses one parameterized query to combine vector similarity with duration, difficulty, geographic radius, and ingestion-time filters.
+
+| Verified property      |                                          Result |
+| ---------------------- | ----------------------------------------------: |
+| PostgreSQL service     |                  Dedicated Tiger Cloud database |
+| Vector extension       |                                pgvector `0.8.7` |
+| Authored destinations  |                                            `24` |
+| Embedding width        |                                `384` dimensions |
+| Transport              |               Verified encrypted TLS connection |
+| Retrieval              |    Real cosine similarity ranking in PostgreSQL |
+| Structured constraints | Duration, difficulty, radius, and recorded time |
+
+### Database and vector verification
+
+![Tiger Cloud SQL verification showing pgvector 0.8.7, 24 outdoor destinations, and 384-dimensional embeddings](https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/y6ukkicsblfrgkilqn90.png)
+
+### Cosine similarity with metadata filters
+
+![Tiger Cloud SQL editor showing pgvector cosine similarity ranking with duration and difficulty filters](https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/rmv13ds0ajl20liqv6e8.png)
+
+The SQL screenshot compares stored destination vectors to demonstrate pgvector ranking inside Tiger Cloud. The application performs the user-facing path: it embeds a natural-language request with MiniLM, sends the resulting vector to PostgreSQL, applies the structured filters, and returns the ranked destinations.
+
+Reviewable evidence:
+
+- [Credential-free Tiger Cloud verification](docs/tiger-evidence.json)
+- [Tiger Cloud retrieval evaluation output](docs/tiger-retrieval-evaluation.json)
+- [Evaluation method and measured results](docs/retrieval-evaluation.md)
+- [SQL evidence queries](db/tiger-evidence.sql)
+
+## Technical architecture
+
+| Layer      | Technology                                | Responsibility                                                            |
+| ---------- | ----------------------------------------- | ------------------------------------------------------------------------- |
+| Interface  | React 19, TypeScript, Vite                | Search, results, saved places, journal, responsive interaction            |
+| Maps       | Leaflet, OpenStreetMap                    | Approximate locations, zoom, and keyboard-accessible pins                 |
+| API        | Python 3.13, FastAPI, Pydantic            | Validation, bounded inference, anonymous sessions, and error handling     |
+| Embeddings | Sentence Transformers, PyTorch CPU        | Pinned open-weight MiniLM inference                                       |
+| Database   | Tiger Cloud PostgreSQL, pgvector, Psycopg | Cosine retrieval, hard filters, and journal persistence                   |
+| Delivery   | FastAPI static build                      | React and the API under one origin; database credentials stay server-side |
+
+### Design decisions
+
+1. **Semantic search is the AI feature.** Embeddings solve the matching problem without a paid inference API or a generative response layer.
+2. **PostgreSQL performs the ranking.** The production query executes `embedding <=> query_vector` inside the database; Python does not sort a list to imitate vector search.
+3. **Exact search fits this catalogue.** An exact scan preserves recall after filtering. An approximate index would add complexity without measurable benefit for 24 vectors.
+4. **Meaning and constraints have separate jobs.** MiniLM handles semantic similarity while SQL enforces promises such as “easy” or “under 45 minutes.”
+5. **Explanations stay grounded.** Result descriptions use stored duration, difficulty, and tags. Similarity is presented as a score, not a confidence percentage.
+6. **One origin reduces exposure.** FastAPI serves the built frontend and API, so no database secret reaches the browser.
+
+## Testing and reliability
+
+The recorded verification uses the real MiniLM model and PostgreSQL/pgvector rather than mocked recommendations.
+
+| Check                  | Verified result                                                                                                              |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| Backend integration    | **23 tests** covering dimensions, normalization, cosine agreement, filters, validation, persistence, isolation, and failures |
+| Browser behavior       | **6 Playwright flows** across desktop and mobile                                                                             |
+| Frontend               | TypeScript checks, formatting, and Vite production build passed                                                              |
+| Continuous integration | GitHub Actions exercises the real-model PostgreSQL path on Linux                                                             |
+| Retrieval evaluation   | Four natural-language queries compared semantic search with a documented keyword baseline                                    |
+
+The small retrieval evaluation is deliberately candid. Both methods averaged **2.25 relevant results in the top three**. Semantic retrieval returned more relevant results by rank five—**4.25 versus 3.50**—while the keyword baseline achieved the stronger reciprocal-rank result. Embeddings broadened useful retrieval for some intents; they did not win every query or metric. See [the complete evaluation](docs/retrieval-evaluation.md).
+
+## Quick start
+
+### Prepared workspace
+
+On the original prepared computer, from this repository directory:
 
 ```bash
 ./scripts/start-workspace.sh
 ```
 
-Open **http://127.0.0.1:8000**. The helper reuses the isolated PostgreSQL server, Python environment, downloaded model, seeded data and frontend build prepared in this workspace. Press Ctrl+C to stop the web server. This convenience script is machine/workspace specific; the portable setup follows.
+Open `http://127.0.0.1:8000`. The helper reuses the workspace's Python environment, model cache, frontend build, and configured database. Press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the server.
 
-If port 8000 is already serving TrailScout, use that running instance instead of starting a second server. The workspace database uses loopback port 55432 and local trust authentication for disposable development data only. Do not expose it to the network.
+### Portable native setup
 
-## Portable native setup
+Requirements:
 
-Requirements: Python 3.13, Node.js 22.12+ (or a compatible newer version), PostgreSQL 17 with pgvector 0.8+, and internet access for initial dependency/model downloads. A fresh PostgreSQL database should use UTF-8.
+- Python 3.13
+- Node.js 22.12 or a compatible newer release
+- PostgreSQL 17+ with pgvector 0.8+
+- Internet access for the initial dependency and model downloads
 
 ```bash
 python3 -m venv .venv
@@ -44,7 +173,7 @@ python -m pip install -r backend/requirements-lock.txt
 cp .env.example .env
 ```
 
-Edit `.env` locally with your database connection string. Use a dedicated empty database and a migration role permitted to create the `vector` extension. Never commit `.env` or paste a connection string into screenshots. The frontend does not need any secret.
+Edit `.env` locally with a connection string for a dedicated UTF-8 PostgreSQL database. The migration role must be able to create the `vector` extension. Never commit `.env`, paste its contents into chat, or include connection details in screenshots.
 
 ```bash
 export PYTHONPATH=backend
@@ -55,28 +184,47 @@ npm --prefix frontend run build
 uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
-Open http://127.0.0.1:8000. API documentation: http://127.0.0.1:8000/docs. Readiness: http://127.0.0.1:8000/api/health.
+Then open:
 
-On Linux, installing a matching CPU-only PyTorch wheel first can avoid downloading CUDA libraries. The Docker/CI recipes describe this, but their exact Linux dependency path still requires validation in a Linux environment.
+- Application: `http://127.0.0.1:8000`
+- API documentation: `http://127.0.0.1:8000/docs`
+- Readiness endpoint: `http://127.0.0.1:8000/api/health`
 
-For frontend development, leave FastAPI running and run `npm --prefix frontend run dev` in a second terminal. Vite proxies `/api` to port 8000. Restart FastAPI after its code changes, or use `uvicorn app.main:app --reload` during development.
+The first seed downloads roughly 90 MB of public model weights plus runtime dependencies. No Hugging Face token or paid AI key is required. Later starts reuse `HF_HOME`; after one successful download, `HF_HUB_OFFLINE=1` keeps model loading offline. Map tiles still require network access.
 
-The first seed loads the pinned public model (~90 MB of weights, plus runtime dependencies). No Hugging Face token or paid AI key is required. Later starts reuse `HF_HOME`; set `HF_HUB_OFFLINE=1` after the first successful download to demonstrate without model network access. Map tiles still require internet access.
+For frontend development, keep FastAPI running and start Vite in another terminal:
 
-### Docker alternative (configuration supplied; not locally executed)
+```bash
+npm --prefix frontend run dev
+```
+
+Vite proxies `/api` to port 8000. Use `uvicorn app.main:app --reload` when iterating on backend code.
+
+### Docker alternative
 
 ```bash
 docker compose up --build
 ```
 
-This builds the frontend, caches the model in the image, starts pgvector PostgreSQL, runs idempotent migration/seed, and starts the app on http://localhost:8000. `docker compose down` stops services while preserving the named database volume. The compose password and loopback bindings are for local development only. Docker was unavailable on the build machine, so native execution is the verified path.
+The supplied configuration builds the frontend, caches the model, starts pgvector PostgreSQL, migrates and seeds the database, and exposes TrailScout at `http://localhost:8000`. `docker compose down` stops the services while preserving the named database volume.
 
-## Test
+Docker was unavailable on the original build machine, so native execution is the verified path. The compose credentials and loopback bindings are for local development only.
 
-Use a **dedicated migrated and seeded test database** for integration tests. They use the real model and pgvector and create/delete their own walk records. Do not point them at a production database.
+## API usage
 
 ```bash
-# With .venv activated, from repository root:
+curl http://127.0.0.1:8000/api/search \
+  -H 'Content-Type: application/json' \
+  -d '{"query":"a quiet place among trees","max_minutes":45,"difficulty":"easy","latitude":43.6532,"longitude":-79.3832,"radius_km":10}'
+```
+
+The API also accepts an explicit `recorded_after` timestamp, such as `"2026-10-09T00:00:00Z"`. This filters catalogue ingestion time; it does not represent current trail conditions.
+
+## Run the tests
+
+Use a dedicated migrated and seeded test database. The integration suite creates and deletes test journal records, so never point it at a production database.
+
+```bash
 export PYTHONPATH=backend
 python -m pytest backend/tests -q
 npm --prefix frontend run build
@@ -87,89 +235,54 @@ npx playwright install chromium
 npm run test:e2e
 ```
 
-On the prepared computer, with the app running, `./scripts/test-workspace.sh` uses the existing local runtime and browser installation.
+On the prepared computer, `./scripts/test-workspace.sh` uses the existing local runtime and browser installation.
 
-The backend suite checks semantic relevance, the reproducible keyword comparison, normalization and dimensions, direct mathematical agreement with PostgreSQL cosine scores, filter correctness, empty results, malicious input, timestamp validation, anonymous-session isolation, persistence, deletion, body limits, origin restrictions and throttling. Browser tests cover desktop and mobile search, saved places, journal persistence, map access, errors, retries and layout overflow. See [verification](docs/verification.md) for actual results.
-
-GitHub Actions runs the same real-model/PostgreSQL integration path on Linux. Its first public run succeeded for commit `00d8d40` on October 10, 2026.
-
-## Architecture
-
-```mermaid
-flowchart LR
-    UI[React + TypeScript] -->|same-origin JSON| API[FastAPI]
-    API -->|request text| ML[MiniLM · 384 dimensions]
-    ML -->|normalized query vector| API
-    API -->|parameterized SQL + filters| DB[(PostgreSQL + pgvector)]
-    DB -->|ranked places / private walk records| API
-    API --> UI
-    UI -->|map tiles| OSM[OpenStreetMap]
-```
-
-| Layer | Technology | Responsibility |
-|---|---|---|
-| Interface | React 19, TypeScript, Vite | Search, saved places, journal, original design |
-| Maps | Leaflet, OpenStreetMap | Approximate park locations, zoom, keyboard-accessible pins |
-| API | Python, FastAPI, Pydantic | Validated requests, bounded inference, sessions, errors |
-| AI | Sentence Transformers, PyTorch CPU | Local open-weight sentence embeddings |
-| Storage | PostgreSQL, pgvector, Psycopg pool | Cosine retrieval, hard filters, private journal persistence |
-| Delivery | Single-origin FastAPI static build | One web service plus a database |
-
-### Important decisions for your presentation
-
-1. **Semantic search is the AI feature.** An embedding model places similar meanings near one another. This MVP does not need a generative chatbot or a paid inference service.
-2. **PostgreSQL does the ranking.** This is not a Python list sorted to look like a vector database: the query executes `embedding <=> query_vector` inside PostgreSQL.
-3. **Exact search fits 24 places.** It preserves recall after filters. An approximate HNSW/DiskANN index would add complexity without benefit at this size. [Architecture notes](docs/architecture.md) explain the growth path.
-4. **Filters and meaning have different jobs.** The model understands text similarity; SQL enforces constraints. Dates represent catalogue ingestion, not live trail reports.
-5. **Grounded explanations stay honest.** Durations, difficulty and tags explain the outing's characteristics. A score is raw cosine similarity, not a confidence percentage.
-6. **One service simplifies deployment.** FastAPI serves the built React files and API under one origin. No database secret goes to the browser.
-7. **The visual system supports the demo.** Large type establishes the product promise immediately; the search console stays above the fold; the map and recommendation cards share one dark content field; bright accents mark actions and semantic-search evidence. The supplied Adobe MAX and environmental dashboard references informed rhythm and hierarchy only. Their imagery, logos and interface assets are not included.
-
-## Repository layout
+## Repository structure
 
 ```text
 backend/app/       API, validation, embeddings, database queries, CLI, catalogue
 backend/tests/     Real PostgreSQL + model integration tests
 frontend/src/      Typed React UI, Leaflet integration, original SVG landscapes
-frontend/e2e/      Desktop/mobile browser tests
-db/               Idempotent schema and Tiger evidence queries
-docs/             Architecture, deployment, demo, evidence, verification
-scripts/          Prepared-workspace launch and test helpers
-Dockerfile        Portable image recipe
-compose.yaml      Local PostgreSQL + setup + web services
+frontend/e2e/      Desktop and mobile browser tests
+db/                Idempotent schema and Tiger evidence queries
+docs/              Architecture, deployment, demo, evidence, verification
+scripts/           Prepared-workspace launch and test helpers
+Dockerfile         Portable image recipe
+compose.yaml       Local PostgreSQL, setup, and web services
 ```
 
-## API example
+## Hackathon context
 
-```bash
-curl http://127.0.0.1:8000/api/search \
-  -H 'Content-Type: application/json' \
-  -d '{"query":"a quiet place among trees","max_minutes":45,"difficulty":"easy","latitude":43.6532,"longitude":-79.3832,"radius_km":10}'
-```
+TrailScout was built for the **Hacktoberfest 2026 Open-Source AI Challenge, Week 1: Touch Grass** and entered in **Best Use of Tiger Data**.
 
-Time filtering is available through `recorded_after`, for example `"2026-10-09T00:00:00Z"`; choose a date appropriate to your actual seeded database. No time filter is silently inferred from a user's prose.
+The use of Tiger Data is functional rather than decorative: TrailScout stores its MiniLM embeddings in Tiger Cloud, performs cosine retrieval with pgvector, and combines that ranking with structured outdoor constraints in the same SQL query. The [published DEV submission](https://dev.to/ryanbudwal14/trailscout-ai-describe-the-feeling-then-go-outside-ik) includes the working demo and cloud-console evidence.
 
-## Deploy and demonstrate
+MLH Global Hack Week's [Implement AI-Powered Vector Search with pgvector](https://www.mlh.com/events/global-hack-week-open-source-90/challenges/01a11b66-3a25-902e-3690-f9ea40cd5014) challenge provided secondary context for the database implementation and evidence.
 
-- [Deployment and safe environment setup](docs/deployment.md)
-- [90-second demo and MLH submission checklist](docs/demo-and-submission.md)
-- [DEV Touch Grass article draft](docs/dev-touch-grass-submission.md)
-- [DEV 60–90-second demo script](docs/dev-demo-script.md)
-- [Tiger Cloud migration and evidence runbook](docs/tiger-cloud-evidence.md)
-- [Verified Tiger Cloud evidence](docs/tiger-evidence.json)
-- [Tiger Cloud retrieval evaluation](docs/tiger-retrieval-evaluation.json)
-- [Measured semantic-versus-keyword evaluation](docs/retrieval-evaluation.md)
-- [Prize and submission readiness](docs/submission-readiness.md)
-- [Measured local database evidence](docs/local-evidence.json)
-- [Actual verification results and remaining work](docs/verification.md)
+## Documentation
+
+- [Published DEV article — repository copy](docs/dev-touch-grass-submission.md)
+- [Architecture and growth path](docs/architecture.md)
+- [Deployment and environment setup](docs/deployment.md)
+- [Tiger Cloud evidence runbook](docs/tiger-cloud-evidence.md)
+- [Credential-free Tiger Cloud evidence](docs/tiger-evidence.json)
+- [Semantic retrieval evaluation](docs/retrieval-evaluation.md)
+- [Verification record](docs/verification.md)
 - [Data and asset provenance](docs/data-and-credits.md)
 
-Tiger Cloud migration, seed, TLS and semantic retrieval are verified. The remaining Tiger Data submission step is to run `db/tiger-evidence.sql` in the Tiger Cloud SQL editor and capture credential-free screenshots that visibly establish the cloud service context.
+## Limitations
 
-## AI tools and licensing
+- The starter catalogue contains 24 Toronto-area places; it is not a comprehensive trail database.
+- Map points and outing characteristics are authored estimates, not live operational data.
+- TrailScout does not provide navigation, route geometries, weather, closures, or safety guidance.
+- MiniLM inference runs on the server. The application is not an offline mobile app.
+- OpenStreetMap tiles and external location links require network access.
+- The application has been demonstrated locally against Tiger Cloud; it does not have a public hosted URL.
 
-The embedding model is [sentence-transformers/all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2), Apache-2.0, pinned to revision `1110a243fdf4706b3f48f1d95db1a4f5529b4d41`. Embeddings are generated at seed time and for queries at runtime. `trust_remote_code=False`; inference is CPU-based.
+## AI assistance, licensing, and acknowledgements
 
-OpenAI Codex assisted with architecture, implementation, original illustrative artwork in SVG code, tests and documentation. No OpenAI API is used at runtime. Review and adapt the implementation before presenting it as your own work, and disclose AI assistance according to the event's rules.
+OpenAI Codex assisted with architecture, implementation, testing, documentation, and original SVG landscape artwork. The implementation and claims were reviewed by the project author. Codex is not part of the runtime: TrailScout search uses MiniLM and PostgreSQL, with no OpenAI API.
 
-Project code and original illustrations: MIT. Fonts, icons, maps and the model retain their own licenses; see [credits](docs/data-and-credits.md). The supplied reference images were used for visual direction only and are not included in the app.
+Project code and original illustrations are licensed under the [MIT License](LICENSE). MiniLM is Apache-2.0. Fonts, icons, maps, and other dependencies retain their respective licenses; see [data and asset credits](docs/data-and-credits.md).
+
+The visual references supplied during design informed rhythm and hierarchy only. Their photographs, logos, and interface assets are not included in TrailScout.
